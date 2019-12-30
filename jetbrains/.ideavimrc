@@ -1,0 +1,34 @@
+" general
+nnoremap ,e :<C-u>action SearchEverywhere<CR>
+nnoremap ,f :<C-u>action GotoFile<CR>
+nnoremap ,r :<C-u>action RecentFiles<CR>
+nnoremap ,a :<C-u>action GotoAction<CR>
+vnoremap ,a :<C-u>action GotoAction<CR>
+nnoremap ,s :<C-u>action FileStructurePopup<CR>
+nnoremap ,g :<C-u>action FindInPath<CR>
+
+" jump on code
+nnoremap gd :<C-u>action GotoDeclaration<CR>
+nnoremap gi :<C-u>action GotoImplementation<CR>
+nnoremap gs :<C-u>action GotoSuperMethod<CR>
+nnoremap gb :<C-u>action Back<CR>
+nnoremap gf :<C-u>action Forward<CR>
+nnoremap gu :<C-u>action ShowUsages<CR>
+nnoremap gc :<C-u>action JumpToLastChange<CR>
+nnoremap gt :<C-u>action GotoTest<CR>
+
+" code editing
+nnoremap R :<C-u>action RenameElement<CR>
+nnoremap q :<C-u>action ShowIntentionActions<CR>
+nnoremap == :<C-u>action ReformatCode<CR>
+vnoremap == :<C-u>action ReformatCode<CR>
+nnoremap cc :<C-u>action CommentByLineComment<CR>
+vnoremap cc :<C-u>action CommentByLineComment<CR>
+
+" show information
+nnoremap ,p :<C-u>action PasteMultiple<CR>
+nnoremap ,P :<C-u>action PasteMultiple<CR>
+
+" window
+nnoremap s; :<C-u>action CloseActiveTab<CR>
+nnoremap so :<C-u>action MoveEditorToOppositeTabGroup<CR>
