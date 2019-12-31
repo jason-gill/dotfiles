@@ -1,0 +1,71 @@
+[user]
+	name = Jason Gill
+	email = [Depends on environment]
+
+[merge]
+	ff = false
+
+[pull]
+	rebase = true
+
+[grep]
+	extendedRegexp = true
+
+[core]
+	excludesfile = /Users/jason/.gitignore_global
+
+[alias]
+	alias = config --get-regexp ^alias\\.
+
+	a = add
+	amend = commit --amend
+	b = branch
+	branches = branch -vv
+	brm = branch -d
+	brmf = branch -D
+	c = checkout
+	ci = commit
+	cob = checkout -b
+	com = checkout master
+	f = fetch
+	fpu = push --force
+	l = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --max-count=25
+	lc = log --stat --summary
+	ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	pl = pull
+	pom = pull origin master
+	pr = pull --rebase
+	pu = push
+	rc = rebase --continue
+	ra = rebase --abort
+	s = status --short --branch
+	st = status
+	undo = reset HEAD~
+	wipe = checkout -- .
+
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+  
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
