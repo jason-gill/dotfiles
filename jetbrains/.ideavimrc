@@ -29,6 +29,11 @@ vnoremap cc :<C-u>action CommentByLineComment<CR>
 nnoremap ,p :<C-u>action PasteMultiple<CR>
 nnoremap ,P :<C-u>action PasteMultiple<CR>
 
-" window
-nnoremap s; :<C-u>action CloseActiveTab<CR>
-nnoremap so :<C-u>action MoveEditorToOppositeTabGroup<CR>
+" tabs / editors
+nnoremap tn :<C-u>action NextTab<CR>
+nnoremap tp :<C-u>action PreviousTab<CR>
+nnoremap ts :<C-u>action NextSplitter<CR>
+nnoremap to :<C-u>action SplitVertically<CR> :<C-u>action MoveEditorToOppositeTabGroup<CR>
+nnoremap tc :<C-u>action CloseContent<CR>
+nnoremap tm :<C-u>action MoveEditorToOppositeTabGroup<CR>
+nnoremap tu :<C-u>action Unsplit<CR>
