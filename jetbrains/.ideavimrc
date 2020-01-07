@@ -6,6 +6,7 @@ nnoremap ,a :<C-u>action GotoAction<CR>
 vnoremap ,a :<C-u>action GotoAction<CR>
 nnoremap ,s :<C-u>action FileStructurePopup<CR>
 nnoremap ,g :<C-u>action FindInPath<CR>
+nnoremap ,x :<C-u>action SelectIn<CR>
 
 " jump on code
 nnoremap gd :<C-u>action GotoDeclaration<CR>
