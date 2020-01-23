@@ -1,6 +1,7 @@
+[gui]
 [user]
 	name = Jason Gill
-	email = [Depends on environment]
+	email = [Depends on environment] 
 
 [merge]
 	ff = false
@@ -12,36 +13,60 @@
 	extendedRegexp = true
 
 [core]
-	excludesfile = /Users/jason/.gitignore_global
+	excludesfile = /Users/jason/.gitignore_global	
 
 [alias]
 	alias = config --get-regexp ^alias\\.
 
-	a = add
-	amend = commit --amend
-	b = branch
-	branches = branch -vv
-	brm = branch -d
-	brmf = branch -D
-	c = checkout
+	# -----------------------
+	# basics 
+	# -----------------------
+	cl = clone
 	ci = commit
-	cob = checkout -b
-	com = checkout master
-	f = fetch
-	fpu = push --force
-	l = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --max-count=25
-	lc = log --stat --summary
-	ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	co = checkout
+
 	pl = pull
-	pom = pull origin master
 	pr = pull --rebase
+	pom = pull origin master
+
 	pu = push
+	fpu = push --force
+
 	rc = rebase --continue
 	ra = rebase --abort
+
+	# -----------------------
+	# reset / undo 
+	# -----------------------
+	undo = reset HEAD~1
+	wipe = checkout -- .
+
+	# -----------------------
+	# branching
+	# -----------------------
+	b = branch -vv
+	br = branch -vv
+	brm = branch -d		# remove branch
+	brmf = branch -D	# force remove branch
+	cob = checkout -b
+	com = checkout master
+
+	# -----------------------
+	# reports
+	# -----------------------
 	s = status --short --branch
 	st = status
-	undo = reset HEAD~
-	wipe = checkout -- .
+	l = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --max-count=25
+	ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	llmine = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author='Jason Gill'
+	lc = log --stat --summary
+
+	# -----------------------
+	# Client specific
+	# -----------------------
+	coub = "!f() { git checkout -b users/jason.gill/$1; }; f" 
+	corb = "!f() { git checkout -b features/$1; }; f" 
+	cofb = "!f() { git checkout -b releases/$1; }; f" 
 
 [color]
 	branch = auto
@@ -63,9 +88,9 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-  
-[filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+
+[filter "lfs"]	
+	smudge = git-lfs smudge -- %f	
+	process = git-lfs filter-process	
+	required = true	
 	clean = git-lfs clean -- %f
