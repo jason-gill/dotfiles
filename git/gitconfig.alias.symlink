@@ -1,9 +1,8 @@
-#
 # Include this in your own .gitconfig by using the
 # [include] directive with the path to this file
 #
 # [include]
-#    path = ~/.gitconfig.aliases
+#    path = ~/.gitconfig.alias
 #
 # If you don't have any existing includes, you can add this via the following command
 # 
@@ -11,74 +10,77 @@
 #
 
 [alias]
-	alias = "!git config -l | grep ^alias\\. | cut -c 7-"
+    alias = "!git config -l | grep ^alias\\. | cut -c 7-"
 
-	# basics
-	# -----------------------
-	cl = clone
-	co = checkout
-	cp = cherry-pick
+# basics
+# -----------------------
+    cl = clone
+    co = checkout
+    cp = cherry-pick
 
-	# Commit
-	# -----------------------
-	cm = commit -m
-	cma = !git add -A && git commit -m
-	save = !git add -A && git commit -m 'SAVEPOINT'
-	wip = commit -am "WIP"
+# Commit
+# -----------------------
+    cm = commit -m
+    save = !git add -A && git commit -m                                                 # Save all current work
+    savept = !git add -A && git commit --no-edit --squash `git rev-parse HEAD`          # Save all addtional work that can be sqaushed into previous commit
+    wip = commit -am "WIP"
+    basecm = !git merge-base origin/master `git currentbr`                              # Get base commit for rebase
 
-	# Pull
-	# -----------------------
-	pl = pull
-	plr = pull --rebase
-	plom = pull origin master
+# Pull
+# -----------------------
+    pl = pull
+    plr = pull --rebase
+    plom = pull origin master
 
-	# Push
-	# -----------------------
-	pu = push
-	puf = push --force
-	puo = !git push origin `git branch --show-current`
+# Push
+# -----------------------
+    pu = push
+    puf = push --force
+    puo = !git push origin `git branch --show-current`
 
-	# Rebase
-	# -----------------------
-	rbc = "!f(){ git add -A && git rebase --continue; }; f"
-	rba = rebase --abort
+# Rebase
+# -----------------------
+    rb = !git rebase -i --autosquash `git basecm`                                       # Start rebase from base commit
+    rbc = "!f(){ git add -A && git rebase --continue; }; f"                             # Include all changes and contine rebase
+    rba = rebase --abort
 
-	# Reset / Undo
-	# -----------------------
-	undo = reset --mixed HEAD~1
-	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
-	discardall = checkout -- .
+# Reset / Undo
+# -----------------------
+    undo = reset --mixed HEAD~1                                                         # Unstage your last commit
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard    # Create a save point before nuking changes
+    discardall = checkout -- .                                                          # !!!Nuke Changes Now!!!
 
-	# Branch
-	# -----------------------
-	b = branch -vv
-	br = branch -vv
-	brrm = branch -d	# remove branch
-	brrmf = branch -D	# force remove branch
-	cob = checkout -b
-	com = checkout master
-	master = !git checkout master && git pull origin
-	brstorm = "!f() { git branch -vv | grep ': gone]'; }; f"
-	rmdeadbrs = "!f() { git brstorm | awk '{print $1;}' | xargs -r git branch -D; }; f"
+# Branch
+# -----------------------
+    b = branch -vv
+    br = branch -vv
+    brrm = branch -d                                                                    # Remove branch
+    brrmf = branch -D                                                                   # Force remove branch
+    cob = checkout -b
+    com = checkout master
+    currentbr = !git branch --show-current
+    master = !git checkout master && git pull origin
+    brstorm = "!f() { git branch -vv | grep ': gone]'; }; f"                            # List deleted remote branches
+    rmdeadbrs = "!f() { git brstorm | awk '{print $1;}' | xargs -r git branch -D; }; f" # Remove deleted remote branches
 
-	# Search
-	# -----------------------
-	find = "!git ls-files | grep -i"
-	gr = grep -Ii
-	grep = grep -Ii
+# Search
+# -----------------------
+    find = "!git ls-files | grep -i"
+    gr = grep -Ii
+    grep = grep -Ii
 
-	# Reports
-	# -----------------------
-	s = status --short --branch
-	st = status
-	l = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --max-count=25
-	ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	llmine = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author='Jason Gill'
-	lc = log --stat --summary
+# Reports
+# -----------------------
+    s = status --short --branch
+    st = status
+    l = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --max-count=25
+    ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    llmine = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author='Jason Gill'
+    lc = log --stat --summary
 
-	# -----------------------
-	# Client specific
-	# -----------------------
-	coub = "!f() { git checkout -b users/jason.gill/$1; }; f"
-	corb = "!f() { git checkout -b features/$1; }; f"
-	cofb = "!f() { git checkout -b releases/$1; }; f"
+# -----------------------
+# Client specific
+# -----------------------
+    coub = "!f() { git checkout -b users/jason.gill/$1; }; f"
+    corb = "!f() { git checkout -b features/$1; }; f"
+    cofb = "!f() { git checkout -b releases/$1; }; f"
