@@ -37,6 +37,7 @@
     pu = push
     puf = push --force
     puo = !git push origin `git branch --show-current`
+    puso = !git push --set-upstream origin `git branch --show-current`
 
 # Rebase
 # -----------------------
@@ -47,7 +48,7 @@
 # Reset / Undo
 # -----------------------
     undo = reset --mixed HEAD~1                                                         # Unstage your last commit
-    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard    # Create a save point before nuking changes
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard    # Create a save point before nuking changes.  This can be recovered later using 'git reflog'
     discardall = checkout -- .                                                          # !!!Nuke Changes Now!!!
 
 # Branch
@@ -63,6 +64,10 @@
     brstorm = "!f() { git branch -vv | grep ': gone]'; }; f"                            # List deleted remote branches
     rmdeadbrs = "!f() { git brstorm | awk '{print $1;}' | xargs -r git branch -D; }; f" # Remove deleted remote branches
 
+    coub = "!f() { git checkout -b users/jason.gill/$1; }; f"
+    corb = "!f() { git checkout -b features/$1; }; f"
+    cofb = "!f() { git checkout -b releases/$1; }; f"
+
 # Search
 # -----------------------
     find = "!git ls-files | grep -i"
@@ -77,10 +82,3 @@
     ll = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     llmine = log --pretty=format:'%C(auto)%h %d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --author='Jason Gill'
     lc = log --stat --summary
-
-# -----------------------
-# Client specific
-# -----------------------
-    coub = "!f() { git checkout -b users/jason.gill/$1; }; f"
-    corb = "!f() { git checkout -b features/$1; }; f"
-    cofb = "!f() { git checkout -b releases/$1; }; f"
