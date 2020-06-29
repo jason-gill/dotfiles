@@ -23,6 +23,8 @@
     cm = commit -m
     save = !git add -A && git commit -m                                                 # Save all current work
     savept = !git add -A && git commit --no-edit --squash `git rev-parse HEAD`          # Save all addtional work that can be sqaushed into previous commit
+    fix = !git add -A && git commit --no-edit --fixup `git rev-parse HEAD`
+    fixfor = !git add -A && git commit --no-edit --fixup 
     wip = commit -am "WIP"
     basecm = !git merge-base origin/master `git currentbr`                              # Get base commit for rebase
 
@@ -50,6 +52,12 @@
     undo = reset --mixed HEAD~1                                                         # Unstage your last commit
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard    # Create a save point before nuking changes.  This can be recovered later using 'git reflog'
     discardall = checkout -- .                                                          # !!!Nuke Changes Now!!!
+
+# Stash
+# -----------------------
+    sh = stash push --include-untracked --message
+    shl = stash list
+    shp = stash pop
 
 # Branch
 # -----------------------
