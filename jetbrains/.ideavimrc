@@ -1,47 +1,109 @@
-" general
-nnoremap ,e :<C-u>action SearchEverywhere<CR>
-nnoremap ,f :<C-u>action GotoFile<CR>
-nnoremap ,r :<C-u>action RecentFiles<CR>
-nnoremap ,a :<C-u>action GotoAction<CR>
-vnoremap ,a :<C-u>action GotoAction<CR>
-nnoremap ,s :<C-u>action FileStructurePopup<CR>
-nnoremap ,g :<C-u>action FindInPath<CR>
-vnoremap ,g :<C-u>action FindInPath<CR>
-nnoremap ,x :<C-u>action SelectIn<CR>
-nnoremap ,b :<C-u>action build<CR>
+let mapleader = " "
 
-" jump on code
-nnoremap gt :<C-u>action GotoDeclaration<CR>
-nnoremap gd :<C-u>action GotoDeclaration<CR>
-nnoremap gi :<C-u>action GotoImplementation<CR>
-nnoremap gs :<C-u>action GotoSuperMethod<CR>
-nnoremap gb :<C-u>action Back<CR>
-nnoremap gf :<C-u>action Forward<CR>
-nnoremap gu :<C-u>action ShowUsages<CR>
-nnoremap gc :<C-u>action JumpToLastChange<CR>
+" Pluggins 
+" =============================
+set nerdtree
+set easymotion
+set notimeout
+set which-key
 
-" code editing
-nnoremap R :<C-u>action RenameElement<CR>
-nnoremap q :<C-u>action ShowIntentionActions<CR>
-nnoremap == :<C-u>action ReformatCode<CR>
-vnoremap == :<C-u>action ReformatCode<CR>
-nnoremap cc :<C-u>action CommentByLineComment<CR>
-vnoremap cc :<C-u>action CommentByLineComment<CR>
+" Key Mappings
+" =============================
+imap jj <Esc>
+imap jk <Esc>
 
-" debugging / nav 
-nnoremap =v :<C-u>action ShowBookmarks<CR>
-nnoremap =b :<C-u>action ToggleBookmark<CR>
-nnoremap =n :<C-u>action ToggleBookmarkWithMnemonic<CR>
-nnoremap =s :<C-u>action ViewBreakpoints<CR>
-nnoremap =d :<C-u>action ToggleLineBreakpoint<CR>
+"" Leader Commands
+"" ========================================================
+let g:WhichKeyDesc_leader = "<leader> Leader key"
 
-" tabs / editors
-nnoremap tn :<C-u>action NextTab<CR>
-nnoremap tp :<C-u>action PreviousTab<CR>
-nnoremap ts :<C-u>action NextSplitter<CR>
-nnoremap to :<C-u>action SplitVertically<CR> :<C-u>action MoveEditorToOppositeTabGroup<CR>
-nnoremap tc :<C-u>action CloseContent<CR>
-nnoremap tm :<C-u>action MoveEditorToOppositeTabGroup<CR>
-nnoremap tu :<C-u>action Unsplit<CR>
-nnoremap t[ :<C-u>action NextProjectWindow<CR>
-nnoremap t] :<C-u>action PreviousProjectWindow<CR>
+" = Reformat Code
+let g:WhichKeyDesc_ReformatCode = "<leader>= Reformat Code"
+nmap <leader>= <Action>(ReformatCode)
+vmap <leader>= <Action>(ReformatCode)
+
+" a Actions 
+let g:WhichKeyDesc_Actions = "<leader>a Actions"
+nmap <leader>al :<C-u>actionlist<CR>
+nmap <leader>ai <Action>(ShowIntentionActions)
+nmap <leader>ab <Action>(build)
+
+" b Bookmarks 
+let g:WhichKeyDesc_Bookmarks = "<leader>b Bookmarks"
+nmap <leader>bb <Action>(ToggleBookmark)
+nmap <leader>bv <Action>(ShowBookmarks)
+nmap <leader>bn <Action>(ToggleBookmarkWithMnemonic)
+
+" c Comment a line
+let g:WhichKeyDesc_CommentLine = "<leader>c Comment Line"
+nmap <leader>c <Action>(CommentByLineComment)
+vmap <leader>c <Action>(CommentByLineComment)
+
+" d Debugging
+let g:WhichKeyDesc_Debugging = "<leader>d Debugging"
+nmap <leader>da <Action>(XDebugger.AttachToProcess)
+nmap <leader>dv <Action>(ViewBreakpoints)
+nmap <leader>dp <Action>(ToggleLineBreakpoint)
+
+" f File Navigation 
+let g:WhichKeyDesc_FileNavigation = "<leader>f File Navigation"
+nmap <leader>fe <Action>(SearchEverywhere)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>fc <Action>(RecentChangedFiles)
+nmap <leader>fa <Action>(GotoAction)
+vmap <leader>fa <Action>(GotoAction)
+nmap <leader>fs <Action>(FileStructurePopup)
+nmap <leader>fg <Action>(FindInPath)
+vmap <leader>fg <Action>(FindInPath)
+nmap <leader>fx <Action>(SelectIn)
+
+" g Code Navigation 
+nmap g, <Action>(VcsShowNextChangeMarker)
+nmap g; <Action>(VcsShowPrevChangeMarker)
+let g:WhichKeyDesc_CodeNavigation = "<leader>g Code Navigation"
+nmap <leader>gt <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gs <Action>(GotoSuperMethod)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>gl <Action>(RecentLocations)
+nmap <leader>gb <Action>(Back)
+nmap <leader>gf <Action>(Forward)
+nmap <leader>g[ <Action>(MethodUp)
+nmap <leader>g] <Action>(MethodDown)
+
+" p Projects 
+let g:WhichKeyDesc_Projects = "<leader>p Projects"
+nmap <leader>pn <Action>(NextProjectWindow)
+nmap <leader>pp <Action>(PreviousProjectWindow)
+
+" r Refactoring 
+let g:WhichKeyDesc_Refactoring = "<leader>r Refactoring"
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>rn <Action>(RenameElement)
+
+" s Easymotion
+let g:WhichKeyDesc_EasyMotion = "<leader>s Easymotion Search"
+nmap <Leader>s <Plug>(easymotion-n)
+
+" t Tests
+let g:WhichKeyDesc_Tests = "<leader>t Tests"
+nmap <leader>tr <Action>(RiderUnitTestRunContextAction)
+nmap <leader>td <Action>(RiderUnitTestDebugContextAction)
+
+" w Window/Tabs 
+let g:WhichKeyDesc_WindowTabs = "<leader>w Window/Tabs"
+" nmap <leader>ww :<C-u>action SplitVertically<CR> :<C-u>action MoveEditorToOppositeTabGroup<CR>
+map <leader>wv <Action>(SplitVertically)
+map <leader>wh <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+map <leader>wn <Action>(NextSplitter)
+nmap <leader>wc <Action>(CloseContent)
+nmap <leader>wp <Action>(PinActiveTab)
+nmap <leader>w. :tabnext<CR>
+nmap <leader>w, :tabprev<CR>
+
+
+" x Open NERDTree (use q to exit)
+let g:WhichKeyDesc_NERDTree = "<leader>x NERD Tree"
+map <leader>x :NERDTreeToggle<CR>
