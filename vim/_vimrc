@@ -5,24 +5,45 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
 set renderoptions=type:directx
-set encoding=utf-8
 
-set number
-set nowrap
-set showmatch
-set visualbell
+" Text Rendering Options
+" =============================
+set encoding=utf-8              " use an encoding that supports unicode
+set nowrap                      " disable line wrapping
 
-set hlsearch
-set smartcase
-set ignorecase
-set incsearch
+" User Interface Options
+" =============================
+set number                      " show line numbers on the sidebar
+set ruler                       " show cursor position
+set visualbell                  " flash the screen instead of beeping on errors
+set showmatch                   " will cause the cursor to jump to the matching bracket briefly
+set showmode                    " displays the current mode in the lower-left corner of the screen
+set showcmd                     " any partial command is displayed at the lower-right of the screen while you type it
 
-set autoindent
-set shiftwidth=4
-set smartindent
-set smarttab
-set softtabstop=4
+" Search Options
+" =============================
+set hlsearch                    " enable search highlighting
+set ignorecase                  " ignore case when searching
+set smartcase                   " switch search to case-sensitive when query contains an uppercase letter
+set incsearch                   " incremental search that shows partial matches
 
-set ruler
-set undolevels=1000
-set backspace=indent,eol,start
+" Indention Options
+" =============================
+set autoindent                  " new lines inherit the indentation of previous lines
+set shiftwidth=4                " when shifting, indent four spaces
+set smartindent                 " an extra level of indentation is added for each { and removed for each }.
+set softtabstop=4               " indent using four spaces
+set smarttab                    " insert 'tabstop' number of spaces when the 'tab' key is pressed
+
+" Misc Options
+" =============================
+set backspace=indent,eol,start  " allow backspacing over indention, line breaks and insertion start
+set history=100                 " how may commands to remember for command mode
+set undolevels=1000             " limit of undos allowed
+
+let mapleader = " "
+
+" Mappings
+" =============================
+imap jj <Esc>
+imap jk <Esc>
